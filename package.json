@@ -1,0 +1,39 @@
+{
+  "name": "ms-tmla-cases-seed",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "tsc": "tsc",
+    "serve": "export NODE_ENV=dev|| set NODE_ENV=dev&& concurrently \"tsc -w\" \"nodemon --delay 1 bin/www\" ",
+    "start": "node ./bin/www",
+    "recreate-folders": "rm -rf dist .tmp && mkdir dist .tmp",
+    "copy-files": "rsync -avm --include='*.js' -f 'hide,! */' ./app .tmp && cp pm2-ecosystem.json .tmp && cp package.json .tmp &&  cp -r bin/ .tmp/bin",
+    "run-npm": "cd ./.tmp/ && npm i --production",
+    "compress-tar": "cd .tmp && tar -zcvf ../dist/ms-tmla-cases.tar ./*",
+    "deploy": "./deployment/deploy.sh",
+    "build": "npm run tsc && npm run recreate-folders && npm run copy-files && npm run run-npm && npm run compress-tar && rm -rf .tmp"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "ejs": "~2.5.2",
+    "express": "~4.14.0",
+    "inversify": "^4.1.0",
+    "mongodb": "^2.2.26",
+    "morgan": "~1.7.0",
+    "nodemon": "^1.11.0",
+    "reflect-metadata": "^0.1.10",
+    "serve-favicon": "~2.3.0",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.0.35",
+    "@types/inversify": "^2.0.33",
+    "@types/mongodb": "^2.2.2",
+    "@types/winston": "^2.3.2",
+    "concurrently": "^3.4.0",
+    "cpy-cli": "^1.0.1",
+    "typescript": "^2.3.2"
+  }
+}

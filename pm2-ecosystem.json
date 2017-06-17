@@ -1,0 +1,12 @@
+{
+    "name": "ms-tmla-cases",
+    "script": "/opt/app/seta/tmla/ms-tmla-cases/bin/www",
+    "watch": false,
+    "ignore_watch": [
+        "[\\/\\\\]\\./",
+        "node_modules"
+    ],
+    "env": {
+        "NODE_ENV": "dev"
+    }
+}
